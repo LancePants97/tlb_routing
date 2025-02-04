@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User Registration Request', type: :request do
+RSpec.describe 'Route Day Request', type: :request do
   it "can route a delivery day" do
     location1 = Location.create!(name: "Twin Lights Brewing", address: "4057 Asbury Ave, Tinton Falls, NJ")
     location2 = Location.create!(name: "The Chubby Pickle", address: "23 Bay Ave, Highlands, NJ")
