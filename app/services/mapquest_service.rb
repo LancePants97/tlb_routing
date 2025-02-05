@@ -10,7 +10,7 @@ class MapquestService
           }.to_json
       end
         
-    json = JSON.parse(response.body, symbolize_names: true)
+    JSON.parse(response.body, symbolize_names: true)
     # binding.pry
   end
 end

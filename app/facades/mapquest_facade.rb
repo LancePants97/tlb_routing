@@ -3,10 +3,11 @@ class MapquestFacade
     data = MapquestService.route_json(locations)
     ordered_routes = data[:route][:locationSequence]
 
-    names = []
+    deliveries = []
     ordered_routes.each do |num|
-      names << locations[num]
+      loc = Location.find_by(address: locations[num])
+      deliveries << loc.name
     end
-    # binding.pry
+    binding.pry
   end
 end
