@@ -1,2 +1,23 @@
-<%= @stops %>
-<%= "This is the page lololol" %>
+<h1>Enter Delivery Locations</h1>
+
+<%= form_with url: deliveries_path, method: :post, local: true do |form| %>
+  <div class="field">
+    <%= form.label :locations, "Enter Locations (Comma Separated)" %>
+    <%= form.text_area :locations, rows: 4, cols: 40, placeholder: "e.g. 'New York, Los Angeles, Chicago'" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit" %>
+  </div>
+<% end %>
+
+<% if @stops.any? %>
+  <h2>Results</h2>
+  <ul>
+    <% @stops.each do |stop| %>
+      <li><%= stop %></li>
+    <% end %>
+  </ul>
+<% elsif flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
