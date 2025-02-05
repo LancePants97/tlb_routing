@@ -8,6 +8,6 @@ class MapquestFacade
       loc = Location.find_by(address: locations[num])
       deliveries << loc.name
     end
-    binding.pry
+    deliveries
   end
 end
