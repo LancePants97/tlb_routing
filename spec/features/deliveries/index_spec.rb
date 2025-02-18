@@ -12,10 +12,10 @@ RSpec.describe 'Route Day Request' do
     location8 = Location.create!(name: "Royal Red Bank", address: "24 White St, Red Bank, NJ")
     location9 = Location.create!(name: "Bethany Wines & Liquors", address: "3160 NJ-35, Hazlet Township, NJ")
     location10 = Location.create!(name: "Watermark", address: "800 Ocean Ave, Asbury Park, NJ")
-  end
-
-  it "can visit the page" do
+  
     visit "/deliveries"
+    fill_in 'locations', with: '"4057 Asbury Ave, Tinton Falls, NJ" "23 Bay Ave, Highlands, NJ" "853 NJ-35, Middletown Township, NJ" "1485 Ocean Ave, Sea Bright, NJ"'
+    click_on "Submit"
     save_and_open_page
   end
 end

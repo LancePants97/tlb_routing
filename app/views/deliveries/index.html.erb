@@ -1,9 +1,9 @@
 <h1>Enter Delivery Locations</h1>
 
-<%= form_with url: deliveries_path, method: :post, local: true do |form| %>
+<%= form_with url: deliveries_path, method: :post, data: { turbo: false }, local: true do |form| %>
   <div class="field">
-    <%= form.label :locations, "Enter Locations (Comma Separated)" %>
-    <%= form.text_area :locations, rows: 4, cols: 40, placeholder: "e.g. 'New York, Los Angeles, Chicago'" %>
+    <%= form.label :locations, "Enter Locations In Double Quotes Each Separated by a Space" %>
+    <%= form.text_area :locations, rows: 4, cols: 40, placeholder: "e.g. '4057 Asbury Ave, Tinton Falls, NJ' '610 Sixth Ave, Asbury Park, NJ' '23 Bay Ave, Highlands, NJ'", value: params[:locations] || '' %>
   </div>
 
   <div class="actions">
@@ -12,7 +12,7 @@
 <% end %>
 
 <% if @stops.any? %>
-  <h2>Results</h2>
+  <h2>Ordered List</h2>
   <ul>
     <% @stops.each do |stop| %>
       <li><%= stop %></li>

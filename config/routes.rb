@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get "/deliveries", to: "deliveries#index"
+  # get "/deliveries", to: "deliveries#index"
+  resources :deliveries, only: [:index, :create]
 end
