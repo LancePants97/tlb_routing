@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Route Day Request', type: :request do
+RSpec.describe 'Route Day Request' do
   it "can successfully return a response" do
     location1 = Location.create!(name: "Twin Lights Brewing", address: "4057 Asbury Ave, Tinton Falls, NJ")
     location2 = Location.create!(name: "The Chubby Pickle", address: "23 Bay Ave, Highlands, NJ")
@@ -12,22 +12,10 @@ RSpec.describe 'Route Day Request', type: :request do
     location8 = Location.create!(name: "Royal Red Bank", address: "24 White St, Red Bank, NJ")
     location9 = Location.create!(name: "Bethany Wines & Liquors", address: "3160 NJ-35, Hazlet Township, NJ")
     location10 = Location.create!(name: "Watermark", address: "800 Ocean Ave, Asbury Park, NJ")
-
-    locations = [
-      location1.address,
-      location2.address,
-      location3.address,
-      location4.address,
-      location5.address,
-      location6.address,
-      location7.address,
-      location8.address,
-      location9.address,
-      location10.address,
-    ]
-    
-    get "/deliveries", params: { json: locations }
-    expect(response.status).to eq(200)
-  end
   
+    visit "/deliveries"
+    fill_in 'locations', with: '"4057 Asbury Ave, Tinton Falls, NJ" "23 Bay Ave, Highlands, NJ" "853 NJ-35, Middletown Township, NJ" "1485 Ocean Ave, Sea Bright, NJ"'
+    click_on "Submit"
+    save_and_open_page
+  end
 end

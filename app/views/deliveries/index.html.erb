@@ -1,0 +1,87 @@
+<%= stylesheet_link_tag 'application', media: 'all' %>
+<%= image_tag('tlb_logo.jpeg', alt: 'Logo', id: 'top-right-logo') %>
+
+<h1>Delivery Day</h1>
+<p><%= "Today's Date: #{Time.now.strftime("%m/%d/%Y")}" %></p>
+<h3>Enter Locations In Double Quotes Each Separated by a Space</h3>
+<h3>Or Click Accounts From List Below</h3>
+<%= form_with url: deliveries_path, method: :post, data: { turbo: false }, local: true do |form| %>
+  <div class="field">
+    <%= form.text_area :locations, rows: 4, cols: 40, placeholder: "e.g. '4057 Asbury Ave, Tinton Falls, NJ' '610 Sixth Ave, Asbury Park, NJ' '23 Bay Ave, Highlands, NJ'", value: params[:locations] || '' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit" %>
+  </div>
+<% end %>
+
+<% if @stops.any? %>
+  <h2>Delivery List</h2>
+  <ul>
+    <% @stops.each do |stop| %>
+      <li><%= stop %></li>
+    <% end %>
+  </ul>
+<% elsif flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+
+<h2>All Accounts</h2>
+<h3>Click Accounts From This List to Add to Deliveries</h3>
+<ul id="all-accounts">
+  <% @accounts.alphabetical.each do |loc| %>
+    <li class="account-location" 
+        data-address="<%= loc.address %>">
+      <%= loc.name %>
+    </li>
+  <% end %>
+</ul>
+
+
+
+<script>
+  // Wait until the document is fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    // Add click event listener to each location
+    const locationItems = document.querySelectorAll('.account-location');
+    locationItems.forEach(function(item) {
+      item.addEventListener('click', function() {
+        const address = item.getAttribute('data-address'); // Get the address from the data-address attribute
+        const locationsField = document.querySelector('textarea[name="locations"]'); // Select the locations text area
+        const currentValue = locationsField.value; // Get current value in the text area
+        // Append the clicked address to the text area, with proper formatting
+        locationsField.value = currentValue ? currentValue + ' "' + address + '"' : '"' + address + '"';
+      });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const locationsList = document.querySelectorAll('.account-location');
+    const locationsField = document.querySelector('textarea[name="locations"]');
+
+    locationsList.forEach(function(locationItem) {
+      locationItem.addEventListener('click', function() {
+        // Add the clicked class to change the appearance of the location
+        locationItem.classList.toggle('clicked-location');
+
+        // Get the location's address from the data attribute
+        const address = locationItem.getAttribute('data-address');
+        
+        // Check if the address is already in the text field
+        const currentText = locationsField.value;
+
+        // Only add the address if it doesn't already exist in the text field
+        if (!currentText.includes(address)) {
+          if (currentText.length > 0) {
+            locationsField.value += `, "${address}"`;  // Add a comma and address
+          } else {
+            locationsField.value = `"${address}"`;  // Add the first address without a comma
+          }
+        }
+      });
+    });
+  });
+</script>
+
