@@ -2,6 +2,8 @@ class DeliveriesController < ApplicationController
   def index
     @stops = []
     @accounts = Location.all
+    @tlb = Location.find_by(name: "Twin Lights Brewing")
+    # binding.pry
   end
 
   def create
