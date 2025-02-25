@@ -18,7 +18,7 @@
 <% if @stops.any? %>
   <h2>Delivery List</h2>
   <ul>
-    <% @stops.each do |stop| %>
+    <% @stops.uniq.each do |stop| %>
       <li><%= stop %></li>
     <% end %>
   </ul>

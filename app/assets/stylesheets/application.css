@@ -48,6 +48,9 @@ h1, h2, h3, p, li {
 #all-accounts li {
   text-decoration: underline; /* Underline the text */
   margin-bottom: 8px; /* Add some space between each list item */
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+  list-style-type: none;
 }
 
 .clicked-location {
@@ -55,3 +58,14 @@ h1, h2, h3, p, li {
   font-weight: bold; /* Optional: make it bold */
 }
 
+#all-accounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+@media (max-width: 768px) {
+  #all-accounts li {
+    width: 100%;
+  }
+}
