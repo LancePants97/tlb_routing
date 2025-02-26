@@ -16,6 +16,6 @@ RSpec.describe 'Route Day Request' do
     visit "/deliveries"
     fill_in 'locations', with: '"4057 Asbury Ave, Tinton Falls, NJ" "23 Bay Ave, Highlands, NJ" "853 NJ-35, Middletown Township, NJ" "1485 Ocean Ave, Sea Bright, NJ"'
     click_on "Submit"
-    save_and_open_page
+    # save_and_open_page
   end
 end
