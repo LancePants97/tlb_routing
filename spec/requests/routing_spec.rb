@@ -29,5 +29,4 @@ RSpec.describe 'Route Day Request', type: :request do
     get "/deliveries", params: { json: locations }
     expect(response.status).to eq(200)
   end
-  
 end
