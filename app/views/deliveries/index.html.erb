@@ -18,9 +18,11 @@
 <% if @stops.any? %>
   <h2>Delivery List</h2>
   <ul>
+  <section id="stops">
     <% @stops.uniq.each do |stop| %>
       <li><%= stop %></li>
     <% end %>
+  </section>
   </ul>
 <% elsif flash[:alert] %>
   <div class="alert"><%= flash[:alert] %></div>
@@ -29,12 +31,14 @@
 <h2>All Accounts</h2>
 <h3>Click Accounts From This List to Add to Deliveries</h3>
 <ul id="all-accounts">
+<section id="all_accounts">
   <% @accounts.alphabetical.each do |loc| %>
     <li class="account-location" 
         data-address="<%= loc.address %>">
       <%= loc.name %>
     </li>
   <% end %>
+</section>
 </ul>
 
 <script>

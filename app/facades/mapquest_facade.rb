@@ -7,7 +7,11 @@ class MapquestFacade
     if ordered_routes
       ordered_routes.each do |num|
         loc = Location.find_by(address: address_array[num])
-        deliveries << loc.name
+        if loc != nil
+          deliveries << loc.name
+        else
+          deliveries << "#{address_array[num]} - Address for this location is invalid. Please check your CSV file."
+        end
       end
       deliveries
     else
