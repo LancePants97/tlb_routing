@@ -1,6 +1,6 @@
 databases:
   - name: delivery_day
-    databaseName: mysite
+    databaseName: delivery_day_db
     user: mysite
     plan: free
 
