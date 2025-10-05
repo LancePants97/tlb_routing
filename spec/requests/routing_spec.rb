@@ -13,21 +13,9 @@ RSpec.describe 'Route Day Request', type: :request do
     location9 = Location.create!(name: "Bethany Wines & Liquors", address: "3160 NJ-35, Hazlet Township, NJ")
     location10 = Location.create!(name: "Watermark", address: "800 Ocean Ave, Asbury Park, NJ")
 
-    locations = [
-      location1.address,
-      location2.address,
-      location3.address,
-      location4.address,
-      location5.address,
-      location6.address,
-      location7.address,
-      location8.address,
-      location9.address,
-      location10.address,
-    ]
+    locations = '"4057 Asbury Ave, Tinton Falls, NJ" "23 Bay Ave, Highlands, NJ" "853 NJ-35, Middletown Township, NJ" "1485 Ocean Ave, Sea Bright, NJ"'
     
     get "/deliveries", params: { json: locations }
     expect(response.status).to eq(200)
   end
-  
 end

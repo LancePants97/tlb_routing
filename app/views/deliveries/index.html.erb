@@ -3,8 +3,7 @@
 
 <h1>Delivery Day</h1>
 <p><%= "Today's Date: #{Time.now.strftime("%m/%d/%Y")}" %></p>
-<h3>Enter Locations In Double Quotes Each Separated by a Space</h3>
-<h3>Or Click Accounts From List Below</h3>
+<h3>Click Accounts From List Below</h3>
 <%= form_with url: deliveries_path, method: :post, data: { turbo: false }, local: true do |form| %>
   <div class="field">
     <%= form.text_area :locations, rows: 4, cols: 40, placeholder: "e.g. '4057 Asbury Ave, Tinton Falls, NJ' '610 Sixth Ave, Asbury Park, NJ' '23 Bay Ave, Highlands, NJ'", value: params[:locations] || '' %>
@@ -18,9 +17,11 @@
 <% if @stops.any? %>
   <h2>Delivery List</h2>
   <ul>
+  <section id="stops">
     <% @stops.uniq.each do |stop| %>
       <li><%= stop %></li>
     <% end %>
+  </section>
   </ul>
 <% elsif flash[:alert] %>
   <div class="alert"><%= flash[:alert] %></div>
@@ -29,12 +30,14 @@
 <h2>All Accounts</h2>
 <h3>Click Accounts From This List to Add to Deliveries</h3>
 <ul id="all-accounts">
+<section id="all_accounts">
   <% @accounts.alphabetical.each do |loc| %>
     <li class="account-location" 
         data-address="<%= loc.address %>">
       <%= loc.name %>
     </li>
   <% end %>
+</section>
 </ul>
 
 <script>
